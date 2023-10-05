@@ -1,6 +1,8 @@
 # Galaxy - assignment 5
 # ------------------------
 
+library(dplyr)
+
 # Task 2
 # ----
 
@@ -62,9 +64,13 @@ galaxies <- read.csv("clean_data.csv")
 
 galaxies %>% 
   ggplot(aes(x = a_26)) +
-  geom_histogram(bins = 70, color = "white") +
+  geom_histogram(bins = 70, fill = "blue", color = "white") +
+  xlab("Linear diameter of galaxy") +
+  ylab("Count") +
   theme_bw()
 
+# The plot shows that small galaxies are not under-represented. Larger galaxies
+# however, is under-represented. 
 
 
 # Task 4
@@ -121,3 +127,32 @@ combined_df %>%
 # It looks like his observations were right. The galaxies with higher velocity
 # are the ones that are furthest away from us
 
+
+# Problem 5 
+# ----
+
+# Task 5 
+# ----
+
+# Read the data
+library(nycflights13)
+flights <- nycflights13::flights
+
+# Exercises 5.2.4
+
+# All flights that had an arrival delay of over 2 hours
+filter(flights, arr_delay > 2)
+
+# All flights that flew to Houson (IAH or HOU)
+filter(flights, dest %in% c("IAH", "HOU"))
+
+# Were operated by United, American or Delta
+filter(flights, carrier %in% c("UA", "AA", "DL"))
+
+# Departed in summer 
+filter(flights, month %in% c("7", "8", "9"))
+
+# Arrived more than 2 hours late, but didnt leave late
+filter(flights, arr_delay >= 2, dep_delay <= 0)
+
+# Delayed by at least 1 hour, but made up 30 mins in flight
