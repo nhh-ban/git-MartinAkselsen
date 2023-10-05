@@ -1,6 +1,9 @@
 # Galaxy - assignment 5
 # ------------------------
 
+# Task 2
+# ----
+
 library(tidyverse)
 
 # Read the entire data file into memory using the readLines()-function. Use the
@@ -51,4 +54,9 @@ cat(comma_sepererated_values_names, sep = "\n", file = "clean_data.csv")
 # Read the finished .csv back into R in the normal way.
 galaxies <- read.csv("clean_data.csv")
 
+# Task 3 
+# ----
 
+galaxies %>% 
+  
+  
