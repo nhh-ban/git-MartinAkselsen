@@ -2,6 +2,7 @@
 # ------------------------
 
 library(dplyr)
+library(ggplot2)
 
 # Task 2
 # ----
@@ -70,7 +71,7 @@ galaxies %>%
   theme_bw()
 
 # The plot shows that small galaxies are not under-represented. Larger galaxies
-# however, is under-represented. 
+# however, is under-represented. This is the opposite from what the problem says
 
 
 # Task 4
