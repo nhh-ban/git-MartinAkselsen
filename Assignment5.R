@@ -237,6 +237,20 @@ mutate(flights_sml,
 
 # Exercises 5.5.2
 
-# 1 - change format on dep_time and sched_dep_time
-flights %>% 
-  
+# 1 - change format on dep_time and sched_dep_time to minutes from midnight
+flights$dep_time <- (flights$dep_time %/% 100) * 60 + 
+  (flights$dep_time %% 100)
+
+flights$dep_time <- sprintf("%02d:%02d",
+                            flights$dep_time %/% 100, 
+                            flights$dep_time %% 100)
+ 
+flights$sched_dep_time <- (flights$sched_dep_time %/% 100) * 60 + 
+  (flights$sched_dep_time %% 100)
+
+flights$sched_dep_time <- sprintf("%02d:%02d",
+                            flights$sched_dep_time %/% 100, 
+                            flights$sched_dep_time %% 100)
+
+
+
