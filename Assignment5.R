@@ -140,6 +140,8 @@ flights <- nycflights13::flights
 
 # Exercises 5.2.4
 
+# 1 
+
 # All flights that had an arrival delay of over 2 hours
 filter(flights, arr_delay > 2)
 
@@ -155,4 +157,86 @@ filter(flights, month %in% c("7", "8", "9"))
 # Arrived more than 2 hours late, but didnt leave late
 filter(flights, arr_delay >= 2, dep_delay <= 0)
 
-# Delayed by at least 1 hour, but made up 30 mins in flight
+
+# 2 - use the between-function to simplify some of the answers
+filter(flights, between(month, 7, 9))
+
+
+# 3 - missing dep-_time
+sum(is.na(flights$dep_time))
+
+# There are 8 255 flights with missing dep_time. 
+flights %>% 
+  filter(is.na(dep_time))
+# The rows woth missing dep_time values, also miss dep_delay, arr_time and
+# arr_delay. This might mean that those flights were scheduled, but never
+# detartured
+
+
+# Exercises 5.3.1
+
+# 1 - sort na-values to the start
+flights %>% 
+  arrange(desc(is.na(dep_time)))
+
+
+# 2 - find the most delayed flights
+flights %>% 
+  arrange(desc(dep_delay))
+
+# The flight that left earliest
+flights %>% 
+  arrange(year, month, day, dep_time)
+
+
+# 3 - fastest flights
+flights <-  flights %>% 
+  mutate(speed = distance / air_time)
+
+flights %>% 
+  arrange(speed)
+
+
+# 4 - shortest and longest travel
+flights %>% 
+  arrange(distance)
+
+flights %>% 
+  arrange(desc(distance))
+
+
+# Exercises 5.4.1
+
+# 1 - select variables in different ways
+flights %>% 
+  select(dep_time, dep_delay, arr_time, arr_delay)
+
+flights %>% 
+  select(starts_with(c("dep", "arr")))
+
+
+# 2 - include a variable multiple times
+flights %>% 
+  select(dep_time, dep_time)
+# It only shows the variable once
+
+
+
+
+flights_sml <- select(flights, 
+                      year:day, 
+                      ends_with("delay"), 
+                      distance, 
+                      air_time
+)
+mutate(flights_sml,
+       gain = dep_delay - arr_delay,
+       speed = distance / air_time * 60
+)
+
+
+# Exercises 5.5.2
+
+# 1 - change format on dep_time and sched_dep_time
+flights %>% 
+  
